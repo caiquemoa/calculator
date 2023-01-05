@@ -25,25 +25,51 @@ main {
 }
 
 main > section {
-	min-height: 600px;
+	min-height: 500px;
 	min-width: 400px;
-	background: rgb(162, 148, 148);
-	border-radius: 1rem;
+	background: #2a2a2b;
+	border-radius: 0.75rem 1rem;
 	padding: 0.75rem;
 	display: flex;
 	flex-direction: column;
 }
 
 .display {
-	background: #fff;
+	background: #ececec;
 	padding: 0.75rem;
-	min-height: 5rem;
+	min-height: 7rem;
 	border-radius: 12px 12px 0 0;
 }
 
 .calculator-body {
-	height: 520px;
+	background: #464646;
+	height: 420px;
 	padding: 1rem;
-	background: #52525a;
 	border-radius: 0 0 12px 12px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.btn {
+	color: #fff;
+	font-size: 1.5rem;
+	font-weight: bold;
+	border-radius: 8px;
+	border: 1px solid black;
+	flex: 1 1 25%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.btn:hover {
+	filter: opacity(0.5);
+	border-color: #fff;
+}
+.btn:active {
+	transform: scale(1.08);
+}
+.btn.-zero {
+	flex-basis: 50%;
 }
