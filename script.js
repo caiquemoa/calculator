@@ -89,3 +89,29 @@ function saveOperator(operator) {
 	if (operationList.length === 3)
 		return (display.textContent = operate(operationList))
 }
+
+function operate(operationItemsList) {
+	const [firstNumber, operator, secondNumber] = operationItemsList
+
+	let result = 0
+	switch (operator) {
+		case '+':
+			result = firstNumber + secondNumber
+			break
+		case '-':
+			result = firstNumber - secondNumber
+			break
+		case '/':
+			result = firstNumber / secondNumber
+			break
+		case '*':
+			result = firstNumber * secondNumber
+			break
+		case '%':
+			result = secondNumber / firstNumber
+	}
+	operationItemsList.length = 0
+	operationItemsList[0] = result
+	if (nextOperator) operationItemsList[1] = nextOperator
+	return result
+}
