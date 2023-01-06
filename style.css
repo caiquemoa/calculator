@@ -36,9 +36,14 @@ main > section {
 
 .display {
 	background: #ececec;
+	min-height: 5rem;
+	max-width: 376px;
 	padding: 0.75rem;
-	min-height: 7rem;
 	border-radius: 12px 12px 0 0;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 2.5rem;
+	overflow: hidden;
 }
 
 .calculator-body {
@@ -52,6 +57,7 @@ main > section {
 }
 
 .btn {
+	background: #2a282b;
 	color: #fff;
 	font-size: 1.5rem;
 	font-weight: bold;
