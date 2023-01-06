@@ -2,6 +2,8 @@ const calculatorBody = document.getElementsByClassName('calculator-body')[0]
 const display = document.getElementsByClassName('display')[0]
 createButtons()
 
+const debugg = document.getElementsByTagName('h1')[0]
+
 const operationList = []
 let nextOperator = ''
 
@@ -79,7 +81,7 @@ function showInDisplay() {
 	}
 }
 
-function saveOperator(operator) {
+function operation(operator) {
 	if (!operationList[0] && operator === '-') return (nextOperator = operator)
 	if (operationList[0]) nextOperator = operator
 	if (operationList[0] && !operationList[2]) {
@@ -108,12 +110,12 @@ function operate(operationItemsList) {
 			result = firstNumber * secondNumber
 			break
 		case '%':
-			result = secondNumber / firstNumber
+			result = (secondNumber * firstNumber) / 100
 	}
 	operationItemsList.length = 0
 	operationItemsList[0] = result
 	if (nextOperator) operationItemsList[1] = nextOperator
-	return result
+	return result % 1 === 0 ? result : result.toFixed(1)
 }
 function clearAll() {
 	display.textContent = '0'
@@ -129,33 +131,35 @@ clearDisplay.addEventListener('click', () => {
 
 const invertSignal = document.getElementById('+/-')
 
-invertSignal.addEventListener(
-	'click',
-	() => (display.textContent = Number(display.textContent) * -1)
-)
+invertSignal.addEventListener('click', () => {
+	display.textContent = Number(display.textContent) * -1
+	if (operationList[0] && !operationList[2])
+		operationList[0] = Number(display.textContent)
+	else if (operationList[2]) operationList[2] = Number(display.textContent)
+})
 
 const division = document.getElementById('/')
 
 division.addEventListener('click', () => {
-	saveOperator('/')
+	operation('/')
 })
 
 const multiply = document.getElementById('*')
 
 multiply.addEventListener('click', () => {
-	saveOperator('*')
+	operation('*')
 })
 
 const subtract = document.getElementById('-')
 
 subtract.addEventListener('click', () => {
-	saveOperator('-')
+	operation('-')
 })
 
 const add = document.getElementById('+')
 
 add.addEventListener('click', () => {
-	saveOperator('+')
+	operation('+')
 })
 
 const equal = document.getElementById('=')
@@ -179,13 +183,16 @@ decimalDot.addEventListener('click', () => {
 const percentage = document.getElementById('%')
 
 percentage.addEventListener('click', () => {
-	console.log(nextOperator)
-	console.log(operationList)
-	if (operationList.length === 3) {
-		const percent = operationList[2] / operationList[0]
+	if (operationList.length === 3 && operationList[1] !== '%') {
+		const percent = (operationList[0] * operationList[2]) / 100
 		operationList[2] = percent
-		saveOperator(operationList[1])
+		operation(operationList[1])
 		return
 	}
-	saveOperator('%')
+	operation('%')
+})
+
+debugg.addEventListener('click', () => {
+	console.log(nextOperator)
+	console.log(operationList)
 })
