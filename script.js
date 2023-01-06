@@ -115,3 +115,14 @@ function operate(operationItemsList) {
 	if (nextOperator) operationItemsList[1] = nextOperator
 	return result
 }
+function clearAll() {
+	display.textContent = '0'
+	nextOperator = ''
+	operationList.length = 0
+}
+
+const clearDisplay = document.getElementById('AC')
+
+clearDisplay.addEventListener('click', () => {
+	clearAll()
+})
