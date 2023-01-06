@@ -126,3 +126,66 @@ const clearDisplay = document.getElementById('AC')
 clearDisplay.addEventListener('click', () => {
 	clearAll()
 })
+
+const invertSignal = document.getElementById('+/-')
+
+invertSignal.addEventListener(
+	'click',
+	() => (display.textContent = Number(display.textContent) * -1)
+)
+
+const division = document.getElementById('/')
+
+division.addEventListener('click', () => {
+	saveOperator('/')
+})
+
+const multiply = document.getElementById('*')
+
+multiply.addEventListener('click', () => {
+	saveOperator('*')
+})
+
+const subtract = document.getElementById('-')
+
+subtract.addEventListener('click', () => {
+	saveOperator('-')
+})
+
+const add = document.getElementById('+')
+
+add.addEventListener('click', () => {
+	saveOperator('+')
+})
+
+const equal = document.getElementById('=')
+
+equal.addEventListener('click', () => {
+	if (operationList.length === 3) {
+		const result = operate(operationList)
+		display.textContent = result
+		operationList.length = 1
+	}
+})
+
+const decimalDot = document.getElementById('.')
+
+decimalDot.addEventListener('click', () => {
+	if (!display.textContent.includes('.')) {
+		display.textContent += '.'
+	}
+})
+
+const percentage = document.getElementById('%')
+
+percentage.addEventListener('click', () => {
+	console.log(nextOperator)
+	console.log(operationList)
+	if (operationList.length === 3) {
+		const percent = operationList[2] / operationList[0]
+		operationList[2] = percent
+		saveOperator(operationList[1])
+		return
+	}
+	saveOperator('%')
+})
