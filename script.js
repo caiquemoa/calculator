@@ -2,8 +2,6 @@ const calculatorBody = document.getElementsByClassName('calculator-body')[0]
 const display = document.getElementsByClassName('display')[0]
 createButtons()
 
-const debugg = document.getElementsByTagName('h1')[0]
-
 const operationList = []
 let nextOperator = ''
 
@@ -83,6 +81,7 @@ function showInDisplay() {
 
 function operation(operator) {
 	if (!operationList[0] && operator === '-') return (nextOperator = operator)
+	else if (!operationList[0]) nextOperator = ''
 	if (operationList[0]) nextOperator = operator
 	if (operationList[0] && !operationList[2]) {
 		operationList[1] = operator
@@ -190,9 +189,4 @@ percentage.addEventListener('click', () => {
 		return
 	}
 	operation('%')
-})
-
-debugg.addEventListener('click', () => {
-	console.log(nextOperator)
-	console.log(operationList)
 })
